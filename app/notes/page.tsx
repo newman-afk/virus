@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-const volume1Chapters = ["第一章 基础"];
+const volume1Chapters = ["第一章 基础", "第二章 感染周期"];
 
 function ChapterLists(chapters: string[]) {
   return chapters.map((chapter, index) => (
@@ -19,13 +19,11 @@ function ChapterLists(chapters: string[]) {
 export default function Notes() {
   return (
     <>
-      <div>
-        <p className="flex justify-center text-lg">卷1 分子生物学</p>
-        <div className="my-7 grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
-          {ChapterLists(volume1Chapters)}
-        </div>
-        <p className="flex justify-center text-lg">卷2 致病机理及防治</p>
+      <p className="text-center text-lg">卷1 分子生物学</p>
+      <div className="my-7 grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
+        {ChapterLists(volume1Chapters)}
       </div>
+      <p className="text-center text-lg">卷2 致病机理及防治</p>
     </>
   );
 }

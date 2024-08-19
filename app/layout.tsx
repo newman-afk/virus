@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="inter.className container mx-auto">
+      <body className="inter.className container mx-auto min-h-full">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -26,14 +27,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          {children}
-          <footer className="my-5 flex justify-center">
-            Built by rust. The source code is available on&nbsp;
-            <a href="https://github.com/newman-afk/virus" rel="noreferrer">
-              Github
-            </a>
-            .
-          </footer>
+          <main className="min-h-screen">{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
