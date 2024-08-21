@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="inter.className container mx-auto min-h-full">
+      <body className="inter.className antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -27,7 +27,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <main className="min-h-screen">{children}</main>
+          <main className="container min-h-screen">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

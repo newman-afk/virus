@@ -1,17 +1,56 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { ModeToggle } from "./ModeToggl"
+import { usePathname } from "next/navigation";
+import { ModeToggle } from "./ModeToggl";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import React from "react";
+
+function NextBreadCrumb() {
+  const paths = usePathname();
+  const pathNames = paths.split("/").filter((path) => path);
+
+  return (
+    <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+        </BreadcrumbItem>
+        {pathNames.length > 0 && <BreadcrumbSeparator />}
+        {pathNames.map((link, index) => {
+          let href = `/${pathNames.slice(0, index + 1).join("/")}`;
+          let itemLink = link[0].toUpperCase() + link.slice(1, link.length);
+          return (
+            <React.Fragment key={index}>
+              <BreadcrumbItem>
+                {pathNames.length !== index + 1 ? (
+                  <BreadcrumbLink href={href}>{itemLink}</BreadcrumbLink>
+                ) : (
+                  <BreadcrumbPage>{itemLink}</BreadcrumbPage>
+                )}
+              </BreadcrumbItem>
+              {pathNames.length !== index + 1 && <BreadcrumbSeparator />}
+            </React.Fragment>
+          );
+        })}
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
+}
 
 export function Header() {
   return (
     <>
-      <header className='flex my-5 justify-between'>
-        <Link href='/' className='text-lg'>
-          Home
-        </Link>
+      <header className="container my-5 flex items-center justify-between">
+        {NextBreadCrumb()}
         <ModeToggle />
       </header>
     </>
-  )
+  );
 }
